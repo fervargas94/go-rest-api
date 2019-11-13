@@ -10,7 +10,7 @@ type reader interface {
 type writer interface {
 }
 
-//Repository  interface DB interface
+//Repository  Data layer INTERFACE
 type repository interface {
 	reader
 	writer
