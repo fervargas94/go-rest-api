@@ -2,17 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
-	"log"
-	"net/http"
+	"recomendations"
 )
 
-func getTop10(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Get top 10")
-}
-
 func main() {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/top10", getTop10)
-	log.Fatal(http.ListenAndServe(":8080", router))
+	itunesRepo := recomendations.NewItunesRepo()
+	spotifyRepo := recomendations.NewSpotifyRepo()
+
+	recSvc := recomendations.NewSvc(itunesRepo)
+	spotifySvc := recomendations.NewSvc(spotifyRepo)
+	fmt.Println(recSvc.GetTopTen())
+	fmt.Println(spotifySvc.GetTopTen())
 }
